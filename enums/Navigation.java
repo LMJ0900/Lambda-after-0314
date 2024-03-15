@@ -2,7 +2,12 @@ package com.turing.api.enums;
 
 import com.turing.api.member.Member;
 import com.turing.api.member.MemberView;
+import com.turing.api.menu.Menu;
+import com.turing.api.menu.MenuController;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -40,14 +45,22 @@ public enum Navigation {
         this.predicate = predicate;
     }
 
-    public static boolean selectmain(Scanner sc) {
-        System.out.println(
-                "x-Exit m-member a-Article ac-Account c-Crawler b-Board");
+    public static boolean selectmain(Scanner sc) throws SQLException {
+        /*System.out.println("[Main]");
+        MenuController.getInstance().getMenusByCategory("navigate").forEach(i-> System.out.print(((Menu)i).getItem() + "  "));*/
+        System.out.println();
+        List<String> ls =MenuController.getInstance().getNAVI();
+        ls.forEach(i-> System.out.println(i));
+
+//        String menu = sc.next();
+//        System.out.println(
+//                "x-Exit m-member a-Article ac-Account c-Crawler b-Board");
         String msg = sc.next();
         return Stream.of(Navigation.values())
                 .filter(i -> i.menu.equals(msg))
                 .findAny().orElse(NAVIGATION_ERROR)
                 .predicate.test(sc);
     }
+
 
 }

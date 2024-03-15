@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ArticleController {
- ArticleService service;
+ ArticleServiceImpl service;
 
     public ArticleController() {
         this.service = ArticleServiceImpl.getInstance();
